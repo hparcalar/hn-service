@@ -1,0 +1,17 @@
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/hn-service
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/hn-service.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/hn-service.deps.json
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/hn-service.runtimeconfig.json
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/hn-service.pdb
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/DynamicExpresso.Core.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Microsoft.Extensions.Configuration.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Microsoft.Extensions.Configuration.Abstractions.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Microsoft.Extensions.Configuration.Binder.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Microsoft.Extensions.Configuration.EnvironmentVariables.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Microsoft.Extensions.Configuration.FileExtensions.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Microsoft.Extensions.Configuration.Json.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Microsoft.Extensions.FileProviders.Abstractions.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Microsoft.Extensions.FileProviders.Physical.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Microsoft.Extensions.FileSystemGlobbing.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Microsoft.Extensions.Primitives.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/publish/Newtonsoft.Json.dll
