@@ -156,6 +156,16 @@ namespace HnService.Services {
                                 DurationInSeconds = Convert.ToInt32(diffForDuration.TotalSeconds),
                             });
                         }
+                        else if (cmd == "STOP") {
+                            HnProcessModel liveProcModel = await _apiNodes.GetData<HnProcessModel>("Process/" + _processModel.HnProcessId);
+                            Console.WriteLine("STOPPED");
+
+                            await _apiNodes.PutData<HnProcessModel>("Process", new HnProcessModel{
+                                ProcStatus = liveProcModel.ProcStatus,
+                                HnProcessId = _processModel.HnProcessId,
+                                MustBeStopped = true,
+                            });
+                        }
                         else if (parsedCmd.StartsWith("DI") || parsedCmd.StartsWith("DO")){
                             var cmdArgs = Regex.Split(parsedCmd, "=");
                             
@@ -281,6 +291,21 @@ namespace HnService.Services {
                     }
                     else
                         _processModel.ProcStatus = 1;
+                    
+
+                    var liveProcModel = await _apiNodes.GetData<HnProcessModel>("Process/" + _processModel.HnProcessId);
+                    if (liveProcModel != null){
+                        if (liveProcModel.MustBeStopped == true){
+                            _processModel.ProcStatus = 0;
+
+                            liveProcModel.ProcStatus = 0;
+                            liveProcModel.MustBeStopped = false;
+                            await _apiNodes.PutData<HnProcessModel>("Process", liveProcModel);
+
+                            if (_activeStep != null)
+                                _activeStep = null;
+                        }
+                    }
                 }
                 catch (System.Exception)
                 {

@@ -1,0 +1,17 @@
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\hn-service.exe
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\hn-service.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\hn-service.deps.json
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\hn-service.runtimeconfig.json
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\hn-service.pdb
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\DynamicExpresso.Core.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Microsoft.Extensions.Configuration.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Microsoft.Extensions.Configuration.Binder.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Microsoft.Extensions.Configuration.EnvironmentVariables.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Microsoft.Extensions.Configuration.Json.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Microsoft.Extensions.FileProviders.Physical.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Microsoft.Extensions.Primitives.dll
+D:\Projects\Heka Inhouse\hn-service\bin\Debug\net5.0\publish\Newtonsoft.Json.dll
