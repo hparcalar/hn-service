@@ -81,33 +81,50 @@ namespace HnService.Services {
         public void Dispose(){
             Stop();
         }
-    
-        private async Task<bool> CheckCondition(string comparison){
+
+        private async Task<string> PrepareConditionText(string comparison){
             try
             {
                 string conditionText = comparison;
                 var variables = Regex.Matches(comparison, "\\[[^\\[\\]]+\\]");
                 foreach (Match vrb in variables)
                 {
-                    var ioPort = vrb.Value.Replace("[","").Replace("]","").ToLower();
-                    var ioResults = await _apiDevice.GetData<DigitalIOResult>("slot/0/io/" + ioPort.Substring(0,2));
-
-                    if (ioPort.Substring(0,2) == "di"){
-                        var portResult = ioResults.io.di.FirstOrDefault(d => d.diIndex == Convert.ToInt32(ioPort.Replace("di","")));
-                        if (portResult != null){
-                            conditionText = conditionText.Replace(vrb.Value, portResult.diStatus.ToString());
-                        }
-                    }
-                    else if (ioPort.Substring(0,2) == "do"){
-                        var portResult = ioResults.io.Do.FirstOrDefault(d => d.doIndex == Convert.ToInt32(ioPort.Replace("do","")));
-                        if (portResult != null){
-                            conditionText = conditionText.Replace(vrb.Value, portResult.doStatus.ToString());
-                        }
-                    }
+                    var ioPort = vrb.Value.Replace("[","").Replace("]","").ToLower().Replace("ı","i");
+                    var ioResult = await GetFromDevice(ioPort);
+                    conditionText = conditionText.Replace(vrb.Value, ioResult.ToString());
                 }
 
+                return conditionText;
+            }
+            catch (System.Exception)
+            {
+                
+            }
+
+            return string.Empty;
+        }
+    
+        private async Task<bool> CheckCondition(string comparison, int satisfiedTime=0){
+            try
+            {
                 var expresso = new Interpreter();
-                return expresso.Eval<bool>(conditionText);
+                bool resultSatisfied = false;
+                
+                string conditionText = await PrepareConditionText(comparison);
+                resultSatisfied = expresso.Eval<bool>(conditionText);
+                
+                while (satisfiedTime > 0){
+                    conditionText = await PrepareConditionText(comparison);
+                    resultSatisfied = expresso.Eval<bool>(conditionText);
+
+                    if (resultSatisfied == false)
+                        break;
+
+                    satisfiedTime -= 200;
+                    await Task.Delay(200);
+                }
+
+                return resultSatisfied;
             }
             catch (System.Exception)
             {
@@ -115,6 +132,58 @@ namespace HnService.Services {
             }
 
             return false;
+        }
+
+        private async Task<int> GetFromDevice(string ioPort){
+            try
+            {
+                int result = -1;
+
+                var ioResults = await _apiDevice.GetData<DigitalIOResult>("slot/0/io/" + ioPort.Substring(0,2));
+
+                if (ioPort.Substring(0,2) == "di"){
+                    var portResult = ioResults.io.di.FirstOrDefault(d => d.diIndex == Convert.ToInt32(ioPort.Replace("di","")));
+                    if (portResult != null){
+                        result = portResult.diStatus;
+                    }
+                }
+                else if (ioPort.Substring(0,2) == "do"){
+                    var portResult = ioResults.io.Do.FirstOrDefault(d => d.doIndex == Convert.ToInt32(ioPort.Replace("do","")));
+                    if (portResult != null){
+                        result = portResult.doStatus;
+                    }
+                }
+
+                return result;
+            }
+            catch (System.Exception)
+            {
+                
+            }
+
+            return -1;
+        }
+
+        private async Task SendToDevice(string ioPort, int ioValue){
+            try
+            {
+                var ioResults = await _apiDevice.GetData<DigitalIOResult>("slot/0/io/" + ioPort.Substring(0,2));
+
+                if (ioPort.Substring(0,2) == "di"){
+                    var portResult = ioResults.io.di.FirstOrDefault(d => d.diIndex == Convert.ToInt32(ioPort.Replace("di","")));
+                    portResult.diStatus = ioValue;
+                }
+                else if (ioPort.Substring(0,2) == "do"){
+                    var portResult = ioResults.io.Do.FirstOrDefault(d => d.doIndex == Convert.ToInt32(ioPort.Replace("do","")));
+                    portResult.doStatus = ioValue;
+                }
+
+                await _apiDevice.PutData<DigitalIOResult>("slot/0/io/" + ioPort.Substring(0,2), ioResults);
+            }
+            catch (System.Exception)
+            {
+                
+            }
         }
         
         private async Task MakeResultActions(ProcessStepModel step, bool conditionSucceeded){
@@ -131,8 +200,8 @@ namespace HnService.Services {
 
                         TimeSpan diffForDuration = DateTime.Now.TimeOfDay - _processStartTime;
                         
-                        if (cmd.StartsWith("STORE")){
-                            var ioPort = (Regex.Split(parsedCmd, "_")[1]).ToLower();
+                        if (parsedCmd.StartsWith("STORE")){
+                            var ioPort = (Regex.Split(parsedCmd, "_")[1]).ToLower().Replace("ı","i");
                             var ioResults = await _apiDevice.GetData<DigitalIOResult>("slot/0/io/" + ioPort.Substring(0,2));
 
                             int portStatus = 0;
@@ -156,7 +225,7 @@ namespace HnService.Services {
                                 DurationInSeconds = Convert.ToInt32(diffForDuration.TotalSeconds),
                             });
                         }
-                        else if (cmd == "STOP") {
+                        else if (parsedCmd == "STOP") {
                             HnProcessModel liveProcModel = await _apiNodes.GetData<HnProcessModel>("Process/" + _processModel.HnProcessId);
                             Console.WriteLine("STOPPED");
 
@@ -166,24 +235,49 @@ namespace HnService.Services {
                                 MustBeStopped = true,
                             });
                         }
+                        else if (parsedCmd.StartsWith("TOGGLE")){ // [TOGGLE_DO5_500_4000]
+                            var cmdArgs = Regex.Split(parsedCmd, "_");
+                            int toggleTimeout = 0, toggleDelay = 500, lastSentSignal=0;
+
+                            if (cmdArgs.Length >= 3)
+                                toggleDelay = Convert.ToInt32(cmdArgs[2]);
+                            if (cmdArgs.Length >= 4)
+                                toggleTimeout = Convert.ToInt32(cmdArgs[3]);
+
+                            while (toggleTimeout > -1){
+                                if (_processModel.ProcStatus == 0)
+                                    break;
+                                
+                                lastSentSignal = lastSentSignal == 0 ? 1 : 0;
+                                await SendToDevice(cmdArgs[1], lastSentSignal);
+
+                                if (toggleTimeout != 0)
+                                    toggleTimeout -= toggleDelay;
+
+                                if (toggleTimeout > -1)
+                                    await Task.Delay(toggleDelay);
+                            }
+                        }
                         else if (parsedCmd.StartsWith("DI") || parsedCmd.StartsWith("DO")){
                             var cmdArgs = Regex.Split(parsedCmd, "=");
                             
-                            var ioPort = cmdArgs[0].Trim().ToLower();
+                            var ioPort = cmdArgs[0].Trim().ToLower().Replace("ı","i");
                             var ioValue = cmdArgs[1].Trim();
 
-                            var ioResults = await _apiDevice.GetData<DigitalIOResult>("slot/0/io/" + ioPort.Substring(0,2));
+                            await SendToDevice(ioPort, Convert.ToInt32(ioValue));
 
-                            if (ioPort.Substring(0,2) == "di"){
-                                var portResult = ioResults.io.di.FirstOrDefault(d => d.diIndex == Convert.ToInt32(ioPort.Replace("di","")));
-                                portResult.diStatus = Convert.ToInt32(ioValue);
-                            }
-                            else if (ioPort.Substring(0,2) == "do"){
-                                var portResult = ioResults.io.Do.FirstOrDefault(d => d.doIndex == Convert.ToInt32(ioPort.Replace("do","")));
-                                portResult.doStatus = Convert.ToInt32(ioValue);
-                            }
+                            // var ioResults = await _apiDevice.GetData<DigitalIOResult>("slot/0/io/" + ioPort.Substring(0,2));
 
-                            await _apiDevice.PutData<DigitalIOResult>("slot/0/io/" + ioPort.Substring(0,2), ioResults);
+                            // if (ioPort.Substring(0,2) == "di"){
+                            //     var portResult = ioResults.io.di.FirstOrDefault(d => d.diIndex == Convert.ToInt32(ioPort.Replace("di","")));
+                            //     portResult.diStatus = Convert.ToInt32(ioValue);
+                            // }
+                            // else if (ioPort.Substring(0,2) == "do"){
+                            //     var portResult = ioResults.io.Do.FirstOrDefault(d => d.doIndex == Convert.ToInt32(ioPort.Replace("do","")));
+                            //     portResult.doStatus = Convert.ToInt32(ioValue);
+                            // }
+
+                            // await _apiDevice.PutData<DigitalIOResult>("slot/0/io/" + ioPort.Substring(0,2), ioResults);
                         }
                     }
                 }
@@ -193,6 +287,7 @@ namespace HnService.Services {
                 
             }
         }
+
         private async Task ListenerLoop(){
             while (_runListen){
 
@@ -209,7 +304,8 @@ namespace HnService.Services {
                 try
                 {
                     var step = ActiveStep;
-                    Console.WriteLine(step.Explanation);
+                    if (!step.ResultAction.Contains("[STOP]"))
+                        Console.WriteLine(step.Explanation);
                     if (step.DelayBefore > 0)
                         await Task.Delay(step.DelayBefore.Value);
 
@@ -220,15 +316,13 @@ namespace HnService.Services {
 
                         bool conditionTimedOut = false;
 
-                        while (!(await CheckCondition(step.Comparison))) {
+                        while (!(await CheckCondition(step.Comparison, _activeStep.ConditionSatisfiedTime))) {
                             await Task.Delay(50);
 
                             TimeSpan conditionChecktime = DateTime.Now.TimeOfDay;
 
                             if (step.ConditionRealizeTimeout > 0){
                                 TimeSpan diffCondTime = conditionChecktime - conditionCheckStartTime;
-
-                                Console.WriteLine(diffCondTime.TotalMilliseconds);
 
                                 if (Convert.ToInt32(diffCondTime.TotalMilliseconds) >= step.ConditionRealizeTimeout){
                                     conditionTimedOut = true;
@@ -241,7 +335,7 @@ namespace HnService.Services {
                             conditionSucceeded = true;
                     }
                     else {
-                        conditionSucceeded = await CheckCondition(step.Comparison);
+                        conditionSucceeded = await CheckCondition(step.Comparison, _activeStep.ConditionSatisfiedTime);
                     }
 
                     // FIRE RESULT ACTION

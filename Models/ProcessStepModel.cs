@@ -11,5 +11,6 @@
         public int HnProcessId { get; set; }
         public bool WaitUntilConditionRealized { get; set; } = false;
         public int ConditionRealizeTimeout { get; set; }
+        public int ConditionSatisfiedTime { get; set; } = 0;
     }
 }
