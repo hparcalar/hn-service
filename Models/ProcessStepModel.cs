@@ -7,6 +7,8 @@
         public int? DelayBefore { get; set; }
         public int? DelayAfter { get; set; }
         public string ResultAction { get; set; }
+        public string ElseAction { get; set; }
+        public string ParallelAction { get; set; }
         public bool IsTestResult { get; set; }
         public int HnProcessId { get; set; }
         public bool WaitUntilConditionRealized { get; set; } = false;

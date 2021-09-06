@@ -56,3 +56,23 @@ D:/Projects/Heka Inhouse/hn-service/bin/Debug/net5.0/Microsoft.Extensions.Primit
 D:/Projects/Heka Inhouse/hn-service/bin/Debug/net5.0/Newtonsoft.Json.dll
 D:/Projects/Heka Inhouse/hn-service/obj/Debug/net5.0/hn-service.csproj.CopyComplete
 D:/Projects/Heka Inhouse/hn-service/obj/Debug/net5.0/hn-service.genruntimeconfig.cache
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/AspNetCore.Reporting.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/AspNetCore.ReportingServices.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/GenCode128.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/Microsoft.Win32.SystemEvents.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/System.CodeDom.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/System.Data.SqlClient.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/System.Drawing.Common.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/System.ServiceModel.Http.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/System.ServiceModel.Primitives.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/System.ServiceModel.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/runtimes/win-arm64/native/sni.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/runtimes/win-x64/native/sni.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/runtimes/win-x86/native/sni.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/runtimes/unix/lib/netstandard2.0/System.Private.ServiceModel.dll
+/home/hakan/Projects/Heka/hn-service/bin/Debug/net5.0/runtimes/win/lib/netstandard2.0/System.Private.ServiceModel.dll

@@ -18,24 +18,32 @@ namespace HnService
 
             Console.WriteLine("-- HEKA Nodes Service App --");
 
-            // GET ALL APPS
-            ApiHelper api = new ApiHelper(HnSession.GetInstance().NodesApiUrl);
-            var result = await api.GetData<HnAppModel[]>("Apps");
+            bool isApiAlive = false;
 
-            // api = new ApiHelper(HnSession.GetInstance().DeviceApiUrl);
-            // api.AddHeader("Accept", "vdn.dac.v1");
-
-            // var xx = await api.GetData<DigitalIOResult>("slot/0/io/do");
-            // Console.WriteLine(xx.Io.Do[7].DoStatus);
-            
-            // START LISTENERS FOR APPS
-            foreach (var app in result)
-            {
-                var procList = await api.GetData<HnProcessModel[]>("Apps/" + app.HnAppId + "/process");
-                foreach (var proc in procList)
+            while (!isApiAlive){
+                try
                 {
-                    DeviceListener dvcManager = new DeviceListener(proc);
-                    dvcManager.Start();
+                    // GET ALL APPS
+                    ApiHelper api = new ApiHelper(HnSession.GetInstance().NodesApiUrl);
+                    var result = await api.GetData<HnAppModel[]>("Apps");
+                    
+                    // START LISTENERS FOR APPS
+                    foreach (var app in result)
+                    {
+                        var procList = await api.GetData<HnProcessModel[]>("Apps/" + app.HnAppId + "/process");
+                        foreach (var proc in procList)
+                        {
+                            DeviceListener dvcManager = new DeviceListener(proc);
+                            dvcManager.Start();
+                        }
+                    }
+
+                    isApiAlive = true;
+                }
+                catch (System.Exception)
+                {
+                    Console.WriteLine("Trying to access HN-API service...");
+                    await Task.Delay(2000);
                 }
             }
 

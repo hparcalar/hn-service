@@ -13,6 +13,7 @@ namespace HnService.Helpers.Api{
         public ApiHelper(string baseUrl){
             this.baseUrl = baseUrl;
             _httpClient = new HttpClient();
+            _httpClient.Timeout = TimeSpan.FromSeconds(5);
         }
 
         public void AddHeader(string header, string value){
