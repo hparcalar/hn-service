@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/hakan/Projects/Heka/hn-service/hn-service.csproj": {}
+    "D:\\Projects\\HekaNodes\\hn-service\\hn-service.csproj": {}
   },
   "projects": {
-    "/home/hakan/Projects/Heka/hn-service/hn-service.csproj": {
+    "D:\\Projects\\HekaNodes\\hn-service\\hn-service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/hakan/Projects/Heka/hn-service/hn-service.csproj",
+        "projectUniqueName": "D:\\Projects\\HekaNodes\\hn-service\\hn-service.csproj",
         "projectName": "hn-service",
-        "projectPath": "/home/hakan/Projects/Heka/hn-service/hn-service.csproj",
-        "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/home/hakan/Projects/Heka/hn-service/obj/",
+        "projectPath": "D:\\Projects\\HekaNodes\\hn-service\\hn-service.csproj",
+        "packagesPath": "C:\\Users\\Berkay\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\HekaNodes\\hn-service\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Berkay\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -97,12 +103,31 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[5.0.4, 5.0.4]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[5.0.4, 5.0.4]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[5.0.4, 5.0.4]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.400/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
         }
       }
     }
