@@ -11,7 +11,6 @@
 /home/hakan/Projects/Heka/hn-service/obj/Debug/net5.0/hn-service.AssemblyInfoInputs.cache
 /home/hakan/Projects/Heka/hn-service/obj/Debug/net5.0/hn-service.AssemblyInfo.cs
 /home/hakan/Projects/Heka/hn-service/obj/Debug/net5.0/hn-service.csproj.CoreCompileInputs.cache
-/home/hakan/Projects/Heka/hn-service/obj/Debug/net5.0/hn-service.csproj.CopyComplete
 /home/hakan/Projects/Heka/hn-service/obj/Debug/net5.0/hn-service.dll
 /home/hakan/Projects/Heka/hn-service/obj/Debug/net5.0/ref/hn-service.dll
 /home/hakan/Projects/Heka/hn-service/obj/Debug/net5.0/hn-service.pdb

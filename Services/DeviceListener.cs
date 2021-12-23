@@ -334,6 +334,8 @@ namespace HnService.Services {
                         TimeSpan diffForDuration = DateTime.Now.TimeOfDay - _processStartTime;
                         
                         if (parsedCmd.StartsWith("STORE")){
+                            string[] cmdParts = Regex.Split(parsedCmd, "_");
+
                             var ioPort = (Regex.Split(parsedCmd, "_")[1]).ToLower().Replace("ı","i");
                             var ioResults = await _apiDevice.GetData<DigitalIOResult>("slot/0/io/" + ioPort.Substring(0,2));
 
@@ -345,6 +347,11 @@ namespace HnService.Services {
                             else if (ioPort.Substring(0,2) == "do"){
                                 var portResult = ioResults.io.Do.FirstOrDefault(d => d.doIndex == Convert.ToInt32(ioPort.Replace("do","")));
                                 portStatus = portResult.doStatus;
+                            }
+
+                            if (cmdParts[0] == "STORE" && cmdParts.Length > 2 && cmdParts[2] == "NOT"){
+                                portStatus = portStatus == 1 ? 0 : 1;
+                                conditionSucceeded = portStatus == 1;
                             }
 
                             Console.WriteLine("STORE: " + (conditionSucceeded ? "OK" : "Not OK"));
