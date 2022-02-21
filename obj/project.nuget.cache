@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JlBVg1n2LLo/ZfEzJ4p5HbW4ElhlqH2jbIaYwnvdTpTmaS7vND+lFibYZ3hqSe7eaRmnXDXMh+V7avdLcPJK3A==",
+  "dgSpecHash": "xNXs/da+pvd4xet+gHRWAzUncW03pa9zsdLSul2herWYTbrJEt5n2yKKvgJTZSmfP+DQZESF+L0ocp9dS7zV/w==",
   "success": true,
-  "projectFilePath": "/home/hakan/Projects/Heka/hn-service/hn-service.csproj",
+  "projectFilePath": "/home/hakan/Projects/Heka/HekaNodes/hn-service/hn-service.csproj",
   "expectedPackageFiles": [
     "/root/.nuget/packages/aspnetcore.reporting/2.1.0/aspnetcore.reporting.2.1.0.nupkg.sha512",
     "/root/.nuget/packages/aspnetcore.reportingservices/2.1.0/aspnetcore.reportingservices.2.1.0.nupkg.sha512",
@@ -64,8 +64,6 @@
     "/root/.nuget/packages/runtime.win.system.io.filesystem/4.3.0/runtime.win.system.io.filesystem.4.3.0.nupkg.sha512",
     "/root/.nuget/packages/runtime.win.system.net.primitives/4.3.0/runtime.win.system.net.primitives.4.3.0.nupkg.sha512",
     "/root/.nuget/packages/runtime.win.system.runtime.extensions/4.3.0/runtime.win.system.runtime.extensions.4.3.0.nupkg.sha512",
-    "/root/.nuget/packages/runtime.win7-x64.runtime.native.system.io.compression/4.3.0/runtime.win7-x64.runtime.native.system.io.compression.4.3.0.nupkg.sha512",
-    "/root/.nuget/packages/runtime.win7.system.private.uri/4.3.0/runtime.win7.system.private.uri.4.3.0.nupkg.sha512",
     "/root/.nuget/packages/system.buffers/4.3.0/system.buffers.4.3.0.nupkg.sha512",
     "/root/.nuget/packages/system.codedom/4.5.0/system.codedom.4.5.0.nupkg.sha512",
     "/root/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",
@@ -113,9 +111,11 @@
     "/root/.nuget/packages/system.threading/4.3.0/system.threading.4.3.0.nupkg.sha512",
     "/root/.nuget/packages/system.threading.overlapped/4.3.0/system.threading.overlapped.4.3.0.nupkg.sha512",
     "/root/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
-    "/root/.nuget/packages/microsoft.netcore.app.runtime.win-x64/5.0.11/microsoft.netcore.app.runtime.win-x64.5.0.11.nupkg.sha512",
-    "/root/.nuget/packages/microsoft.aspnetcore.app.runtime.win-x64/5.0.11/microsoft.aspnetcore.app.runtime.win-x64.5.0.11.nupkg.sha512",
-    "/root/.nuget/packages/microsoft.netcore.app.host.win-x64/5.0.11/microsoft.netcore.app.host.win-x64.5.0.11.nupkg.sha512"
+    "/root/.nuget/packages/microsoft.netcore.app.ref/5.0.0/microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "/root/.nuget/packages/microsoft.aspnetcore.app.ref/5.0.0/microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "/root/.nuget/packages/microsoft.netcore.app.runtime.win-x64/5.0.14/microsoft.netcore.app.runtime.win-x64.5.0.14.nupkg.sha512",
+    "/root/.nuget/packages/microsoft.aspnetcore.app.runtime.win-x64/5.0.14/microsoft.aspnetcore.app.runtime.win-x64.5.0.14.nupkg.sha512",
+    "/root/.nuget/packages/microsoft.netcore.app.host.win-x64/5.0.14/microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512"
   ],
   "logs": []
 }

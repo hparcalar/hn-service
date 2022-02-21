@@ -59,6 +59,27 @@ namespace HnService.Services {
 
             ActiveStep = nextStep;
         }
+
+        private async Task RewindToFirstStep(){
+            try
+            {
+                _processModel.ProcStatus = 0;
+                try
+                {
+                    await _apiNodes.PutData<HnProcessModel>("Process", _processModel);
+                }
+                catch (System.Exception)
+                {
+                    Console.WriteLine("HN-API is not accessible!");
+                }
+            }
+            catch (System.Exception)
+            {
+                
+            }
+
+            ActiveStep = null;
+        }
         public void Start(){
             _runCheckLive = true;
             _taskCheckLive = Task.Run(CheckLiveLoop);
@@ -364,6 +385,9 @@ namespace HnService.Services {
                                 IsOk = conditionSucceeded,
                                 DurationInSeconds = Convert.ToInt32(diffForDuration.TotalSeconds),
                             });
+                        }
+                        else if (parsedCmd.StartsWith("BREAK")){
+                            await RewindToFirstStep();
                         }
                         else if (parsedCmd.StartsWith("STOP")) {
                             HnProcessModel[] liveProcModels = await _apiNodes.GetData<HnProcessModel[]>("Apps/" + _processModel.HnAppId + "/process");

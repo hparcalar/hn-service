@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/hakan/Projects/Heka/hn-service/hn-service.csproj": {}
+    "/home/hakan/Projects/Heka/HekaNodes/hn-service/hn-service.csproj": {}
   },
   "projects": {
-    "/home/hakan/Projects/Heka/hn-service/hn-service.csproj": {
+    "/home/hakan/Projects/Heka/HekaNodes/hn-service/hn-service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/hakan/Projects/Heka/hn-service/hn-service.csproj",
+        "projectUniqueName": "/home/hakan/Projects/Heka/HekaNodes/hn-service/hn-service.csproj",
         "projectName": "hn-service",
-        "projectPath": "/home/hakan/Projects/Heka/hn-service/hn-service.csproj",
+        "projectPath": "/home/hakan/Projects/Heka/HekaNodes/hn-service/hn-service.csproj",
         "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/home/hakan/Projects/Heka/hn-service/obj/",
+        "outputPath": "/home/hakan/Projects/Heka/HekaNodes/hn-service/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/root/.nuget/NuGet/NuGet.Config"
@@ -99,16 +99,24 @@
           "warn": true,
           "downloadDependencies": [
             {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[5.0.11, 5.0.11]"
+              "version": "[5.0.14, 5.0.14]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[5.0.11, 5.0.11]"
+              "version": "[5.0.14, 5.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[5.0.11, 5.0.11]"
+              "version": "[5.0.14, 5.0.14]"
             }
           ],
           "frameworkReferences": {
@@ -116,11 +124,11 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
-        "win10-x64": {
+        "win-x64": {
           "#import": []
         }
       }
