@@ -377,14 +377,28 @@ namespace HnService.Services {
 
                             Console.WriteLine("STORE: " + (conditionSucceeded ? "OK" : "Not OK"));
 
-                            await _apiNodes.PostData<ProcessResultModel>("Results", new ProcessResultModel{
-                                CreatedDate = DateTime.Now,
-                                ProcessStepId = step.ProcessStepId,
-                                StrResult = null,
-                                NumResult = portStatus,
-                                IsOk = conditionSucceeded,
-                                DurationInSeconds = Convert.ToInt32(diffForDuration.TotalSeconds),
-                            });
+                            if (conditionSucceeded){
+                                if (!_processModel.Steps.Any(d => d.IsTestResult == true && d.OrderNo > step.OrderNo)){
+                                    await _apiNodes.PostData<ProcessResultModel>("Results", new ProcessResultModel{
+                                        CreatedDate = DateTime.Now,
+                                        ProcessStepId = step.ProcessStepId,
+                                        StrResult = null,
+                                        NumResult = portStatus,
+                                        IsOk = conditionSucceeded,
+                                        DurationInSeconds = Convert.ToInt32(diffForDuration.TotalSeconds),
+                                    });
+                                }
+                            }
+                            else
+                                await _apiNodes.PostData<ProcessResultModel>("Results", new ProcessResultModel{
+                                        CreatedDate = DateTime.Now,
+                                        ProcessStepId = step.ProcessStepId,
+                                        StrResult = null,
+                                        NumResult = portStatus,
+                                        IsOk = conditionSucceeded,
+                                        DurationInSeconds = Convert.ToInt32(diffForDuration.TotalSeconds),
+                                    });
+                            
                         }
                         else if (parsedCmd.StartsWith("BREAK")){
                             await RewindToFirstStep();
